@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: MyTownSports
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    driver-class-name: org.h2.Driver
+    username: sa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        create_empty_composites:
+          enabled: true
+        show_sql: true
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
