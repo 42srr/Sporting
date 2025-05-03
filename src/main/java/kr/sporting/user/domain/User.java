@@ -45,7 +45,7 @@ public class User {
     private String address;
 
     @Nullable
-    @Column(name = "brith_date")
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
     @CreatedDate
