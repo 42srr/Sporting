@@ -56,4 +56,9 @@ public class UserService {
                 .findById(id)
                 .orElseThrow(UserNotFoundException::new);
     }
+
+    @Transactional(readOnly = true)
+    public boolean isNicknameAlreadyExists(String nickname) {
+        return userRepository.findByNickname(nickname).isPresent();
+    }
 }

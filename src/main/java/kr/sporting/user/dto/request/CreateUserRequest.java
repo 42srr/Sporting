@@ -5,13 +5,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
+import kr.sporting.user.annotation.Nickname;
 
 import java.time.LocalDate;
 
 @Schema(description = "회원가입 요청")
 public record CreateUserRequest(
         @NotNull
-        @Pattern(regexp = "^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{3,12}$")
+        @Nickname
         @Schema(description = "닉네임")
         String nickname,
 

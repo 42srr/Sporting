@@ -39,6 +39,7 @@ public interface UserApi {
             @PathVariable
             Long userId,
 
+            @Valid
             @RequestBody
             UpdateUserRequest request
     );
