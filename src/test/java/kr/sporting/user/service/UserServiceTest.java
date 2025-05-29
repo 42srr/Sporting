@@ -51,7 +51,6 @@ class UserServiceTest {
                 .birthDate(LocalDate.of(1990, 1, 1))
                 .build();
 
-        when(userRepository.findByNickname(request.nickname())).thenReturn(Optional.empty());
         when(bCryptPasswordEncoder.encode(request.password())).thenReturn(encodedPw);
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
@@ -63,7 +62,6 @@ class UserServiceTest {
         assertThat(result.getPassword()).isEqualTo(encodedPw);
         assertThat(result.getEmail()).isEqualTo("test@email.com");
         assertThat(result.getBirthDate()).isEqualTo(LocalDate.of(1990, 1, 1));
-        verify(userRepository).findByNickname("newNick");
         verify(bCryptPasswordEncoder).encode("plainPw");
         verify(userRepository).save(any(User.class));
     }
@@ -83,7 +81,6 @@ class UserServiceTest {
         );
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
-        when(userRepository.findByNickname(request.nickname())).thenReturn(Optional.empty());
 
         // when
         User updated = userService.updateUser(userId, request);
@@ -93,7 +90,6 @@ class UserServiceTest {
         assertThat(updated.getAddress()).isEqualTo("newAddress");
         assertThat(updated.getBirthDate()).isEqualTo(LocalDate.of(2000, 1, 1));
         verify(userRepository).findById(userId);
-        verify(userRepository).findByNickname("newNick");
     }
 
     @Test
