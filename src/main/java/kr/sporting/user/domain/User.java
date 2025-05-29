@@ -57,7 +57,9 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
 
         User user = (User) o;
-        return id.equals(user.id);
+        if (this.id == null && user.id == null) return true;
+        if (this.id == null || user.id == null) return false;
+        return this.id.equals(user.id);
     }
 
     @Override
