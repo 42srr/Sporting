@@ -17,17 +17,17 @@ import lombok.*;
 @Schema(description = "팀 생성")
 public class CreateTeamRequest {
 
-    @NotBlank(message = "팀 이름은 필수 입력값입니다.")
-    @Schema(description = "팀 이름")
+    @NotBlank(message = "이름은 필수 입력값입니다.")
+    @Schema(description = "이름")
     private String name;
 
     @NotBlank(message = "주소는 필수 입력값입니다.")
-    @Schema(description = "팀 지역")
+    @Schema(description = "지역")
     private String address;
 
-    @NotNull(message = "최대 멤버 수는 필수 입력값입니다.")
-    @Min(value = 2, message = "최대 팀원 수는 1보다 커야합니다.")
-    @Schema(description = "팀 최대 인원")
+    @NotNull(message = "최대 인원 수는 필수 입력값입니다.")
+    @Min(value = 2, message = "최대 인원 수는 1보다 커야합니다.")
+    @Schema(description = "최대 인원")
     private Integer size;
 
     public Team toEntity() {
