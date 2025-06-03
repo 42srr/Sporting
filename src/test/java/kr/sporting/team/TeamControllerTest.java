@@ -63,9 +63,9 @@ class TeamControllerTest {
     void testCreateTeam_ReturnsCreatedTeam() throws Exception {
         // given
         CreateTeamRequest request = CreateTeamRequest.builder()
-                .teamName("New Team")
+                .name("New Team")
                 .address("New Address")
-                .teamSize(10)
+                .size(10)
                 .build();
 
         Mockito.when(teamService.createTeam(any(Team.class))).thenAnswer(invocation -> {
@@ -105,17 +105,17 @@ class TeamControllerTest {
     void testUpdateTeam_ReturnsUpdatedTeam() throws Exception {
         // given
         UpdateTeamRequest request = UpdateTeamRequest.builder()
-                .teamName("Updated Team")
+                .name("Updated Team")
                 .address("Updated Address")
-                .teamSize(15)
+                .size(15)
                 .build();
 
         Mockito.when(teamService.updateTeam(eq(1L), any(UpdateTeamRequest.class)))
                 .thenReturn(Team.builder()
                         .id(1L)
-                        .name(request.getTeamName())
+                        .name(request.getName())
                         .address(request.getAddress())
-                        .size(request.getTeamSize())
+                        .size(request.getSize())
                         .build());
 
         // when & then
@@ -124,9 +124,9 @@ class TeamControllerTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.name").value(request.getTeamName()))
+                .andExpect(jsonPath("$.name").value(request.getName()))
                 .andExpect(jsonPath("$.address").value(request.getAddress()))
-                .andExpect(jsonPath("$.size").value(request.getTeamSize()));
+                .andExpect(jsonPath("$.size").value(request.getSize()));
 
         Mockito.verify(teamService).updateTeam(eq(1L), any(UpdateTeamRequest.class));
     }
@@ -178,9 +178,9 @@ class TeamControllerTest {
     void testCreateTeam_InvalidRequest_ReturnsBadRequest() throws Exception {
         // given: invalid request (missing required fields)
         CreateTeamRequest invalidRequest = CreateTeamRequest.builder()
-                .teamName(null)
+                .name(null)
                 .address("New Address")
-                .teamSize(0)
+                .size(0)
                 .build();
 
         // when & then
@@ -194,9 +194,9 @@ class TeamControllerTest {
     void testUpdateTeam_InvalidRequest_ReturnsBadRequest() throws Exception {
         // given: invalid request data
         UpdateTeamRequest invalidRequest = UpdateTeamRequest.builder()
-                .teamName("")
+                .name("")
                 .address("")
-                .teamSize(1)
+                .size(1)
                 .build();
 
         // when & then
