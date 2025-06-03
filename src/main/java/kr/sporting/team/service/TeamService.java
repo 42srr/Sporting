@@ -29,16 +29,16 @@ public class TeamService {
     public Team updateTeam(Long teamId, UpdateTeamRequest request) {
         Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
 
-        if (request.getTeamName() != null) {
-            team.setName(request.getTeamName());
+        if (request.getName() != null) {
+            team.setName(request.getName());
         }
 
         if (request.getAddress() != null) {
             team.setAddress(request.getAddress());
         }
 
-        if (request.getTeamSize() != null) {
-            team.setSize(request.getTeamSize());
+        if (request.getSize() != null) {
+            team.setSize(request.getSize());
         }
 
         teamRepository.save(team);
