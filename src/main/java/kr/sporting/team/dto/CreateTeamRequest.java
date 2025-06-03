@@ -32,9 +32,9 @@ public class CreateTeamRequest {
 
     public Team toEntity() {
         return Team.builder()
-                .teamName(this.teamName)
+                .name(this.teamName)
                 .address(this.address)
-                .teamSize(this.teamSize)
+                .size(this.teamSize)
                 .build();
     }
 }

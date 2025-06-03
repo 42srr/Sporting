@@ -30,7 +30,7 @@ public class TeamService {
         Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
 
         if (request.getTeamName() != null) {
-            team.setTeamName(request.getTeamName());
+            team.setName(request.getTeamName());
         }
 
         if (request.getAddress() != null) {
@@ -38,7 +38,7 @@ public class TeamService {
         }
 
         if (request.getTeamSize() != null) {
-            team.setTeamSize(request.getTeamSize());
+            team.setSize(request.getTeamSize());
         }
 
         teamRepository.save(team);
