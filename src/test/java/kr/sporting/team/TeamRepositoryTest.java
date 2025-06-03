@@ -21,14 +21,14 @@ class TeamRepositoryTest {
     @BeforeEach
     void setUp() {
         teamRepository.save(Team.builder()
-                .teamName("Lakers")
+                .name("Lakers")
                 .address("Los Angeles")
-                .teamSize(15) // 필수 컬럼 값을 지정
+                .size(15) // 필수 컬럼 값을 지정
                 .build());
         teamRepository.save(Team.builder()
-                .teamName("Warriors")
+                .name("Warriors")
                 .address("San Francisco")
-                .teamSize(12) // 필수 컬럼 값을 지정
+                .size(12) // 필수 컬럼 값을 지정
                 .build());
     }
 
@@ -41,37 +41,37 @@ class TeamRepositoryTest {
     @Test
     void testSave_PersistsTeam() {
         Team team = Team.builder()
-                .teamName("Bulls")
+                .name("Bulls")
                 .address("Chicago")
-                .teamSize(14) // 필수 컬럼 값을 지정
+                .size(14) // 필수 컬럼 값을 지정
                 .build();
         Team savedTeam = teamRepository.save(team);
 
         assertThat(savedTeam.getId()).isNotNull();
-        assertThat(savedTeam.getTeamName()).isEqualTo("Bulls");
+        assertThat(savedTeam.getName()).isEqualTo("Bulls");
         assertThat(savedTeam.getAddress()).isEqualTo("Chicago");
     }
 
     @Test
     void testFindById_ReturnsTeam() {
         Team team = teamRepository.save(Team.builder()
-                .teamName("Celtics")
+                .name("Celtics")
                 .address("Boston")
-                .teamSize(10) // 필수 컬럼 값을 지정
+                .size(10) // 필수 컬럼 값을 지정
                 .build());
         Team foundTeam = teamRepository.findById(team.getId()).orElse(null);
 
         assertThat(foundTeam).isNotNull();
-        assertThat(foundTeam.getTeamName()).isEqualTo("Celtics");
+        assertThat(foundTeam.getName()).isEqualTo("Celtics");
         assertThat(foundTeam.getAddress()).isEqualTo("Boston");
     }
 
     @Test
     void testDelete_RemovesTeam() {
         Team team = teamRepository.save(Team.builder()
-                .teamName("Nets")
+                .name("Nets")
                 .address("Brooklyn")
-                .teamSize(9) // 필수 컬럼 값을 지정
+                .size(9) // 필수 컬럼 값을 지정
                 .build());
 
         teamRepository.delete(team);

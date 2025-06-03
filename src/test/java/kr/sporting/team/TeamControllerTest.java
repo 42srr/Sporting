@@ -52,9 +52,9 @@ class TeamControllerTest {
     void setUp() {
         teamRepository.deleteAll();
         mockTeam = Team.builder()
-                .teamName("Mock Team")
+                .name("Mock Team")
                 .address("Mock Address")
-                .teamSize(5)
+                .size(5)
                 .build();
 //        mockTeam.setId(1L);
     }
@@ -94,9 +94,9 @@ class TeamControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(mockTeam.getId()))
-                .andExpect(jsonPath("$.teamName").value(mockTeam.getTeamName()))
+                .andExpect(jsonPath("$.name").value(mockTeam.getName()))
                 .andExpect(jsonPath("$.address").value(mockTeam.getAddress()))
-                .andExpect(jsonPath("$.teamSize").value(mockTeam.getTeamSize()));
+                .andExpect(jsonPath("$.size").value(mockTeam.getSize()));
 
         Mockito.verify(teamService).getTeamById(1L);
     }
@@ -113,9 +113,9 @@ class TeamControllerTest {
         Mockito.when(teamService.updateTeam(eq(1L), any(UpdateTeamRequest.class)))
                 .thenReturn(Team.builder()
                         .id(1L)
-                        .teamName(request.getTeamName())
+                        .name(request.getTeamName())
                         .address(request.getAddress())
-                        .teamSize(request.getTeamSize())
+                        .size(request.getTeamSize())
                         .build());
 
         // when & then
@@ -124,9 +124,9 @@ class TeamControllerTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.teamName").value(request.getTeamName()))
+                .andExpect(jsonPath("$.name").value(request.getTeamName()))
                 .andExpect(jsonPath("$.address").value(request.getAddress()))
-                .andExpect(jsonPath("$.teamSize").value(request.getTeamSize()));
+                .andExpect(jsonPath("$.size").value(request.getTeamSize()));
 
         Mockito.verify(teamService).updateTeam(eq(1L), any(UpdateTeamRequest.class));
     }
@@ -151,9 +151,9 @@ class TeamControllerTest {
         teams.add(mockTeam);
         teams.add(Team.builder()
                 .id(2L)
-                .teamName("Second Team")
+                .name("Second Team")
                 .address("Second Address")
-                .teamSize(8)
+                .size(8)
                 .build());
 
         Mockito.when(teamService.getTeams()).thenReturn(teams);
@@ -163,13 +163,13 @@ class TeamControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(mockTeam.getId()))
-                .andExpect(jsonPath("$[0].teamName").value(mockTeam.getTeamName()))
+                .andExpect(jsonPath("$[0].name").value(mockTeam.getName()))
                 .andExpect(jsonPath("$[0].address").value(mockTeam.getAddress()))
-                .andExpect(jsonPath("$[0].teamSize").value(mockTeam.getTeamSize()))
+                .andExpect(jsonPath("$[0].size").value(mockTeam.getSize()))
                 .andExpect(jsonPath("$[1].id").value(2L))
-                .andExpect(jsonPath("$[1].teamName").value("Second Team"))
+                .andExpect(jsonPath("$[1].name").value("Second Team"))
                 .andExpect(jsonPath("$[1].address").value("Second Address"))
-                .andExpect(jsonPath("$[1].teamSize").value(8));
+                .andExpect(jsonPath("$[1].size").value(8));
 
         Mockito.verify(teamService).getTeams();
     }

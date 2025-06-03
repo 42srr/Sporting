@@ -33,28 +33,28 @@ class TeamServiceTest {
     void testCreateTeam_SavesAndReturnsTeam() {
         // 필수 필드 포함
         Team team = new Team();
-        team.setTeamName("Celtics");
+        team.setName("Celtics");
         team.setAddress("Boston");
-        team.setTeamSize(10);
+        team.setSize(10);
 
         Team createdTeam = teamService.createTeam(team);
 
-        assertThat(createdTeam.getTeamName()).isEqualTo("Celtics");
+        assertThat(createdTeam.getName()).isEqualTo("Celtics");
         assertThat(createdTeam.getAddress()).isEqualTo("Boston");
     }
 
     @Test
     void testGetTeamById_ReturnsTeam() {
         Team team = Team.builder()
-                .teamName("Lakers")
+                .name("Lakers")
                 .address("Los Angeles")
-                .teamSize(15)
+                .size(15)
                 .build();
 
         Team result = teamRepository.save(team);
         Team foundTeam = teamService.getTeamById(result.getId());
 
-        assertThat(foundTeam.getTeamName()).isEqualTo("Lakers");
+        assertThat(foundTeam.getName()).isEqualTo("Lakers");
         assertThat(foundTeam.getAddress()).isEqualTo("Los Angeles");
     }
 
@@ -66,29 +66,29 @@ class TeamServiceTest {
     @Test
     void testGetAllTeams_ReturnsAllTeams() {
         Team team1 = Team.builder()
-                .teamName("Lakers")
+                .name("Lakers")
                 .address("Los Angeles")
-                .teamSize(15)
+                .size(15)
                 .build();
         Team team2 = Team.builder()
-                .teamName("Warriors")
+                .name("Warriors")
                 .address("San Francisco")
-                .teamSize(12)
+                .size(12)
                 .build();
 
         teamRepository.saveAll(Arrays.asList(team1, team2));
 
         assertThat(teamService.getTeams()).hasSize(2)
-                .extracting(Team::getTeamName)
+                .extracting(Team::getName)
                 .containsExactly("Lakers", "Warriors");
     }
 
     @Test
     void testDeleteTeam_DeletesTeam() {
         Team team1 = Team.builder()
-                .teamName("Lakers")
+                .name("Lakers")
                 .address("Los Angeles")
-                .teamSize(15)
+                .size(15)
                 .build();
 
         teamRepository.save(team1);
